@@ -14,7 +14,7 @@ export function Services({
   dict: Dictionary;
 }) {
   return (
-    <section className="bg-slate-50 py-20 lg:py-28">
+    <section className="bg-paper-soft py-20 lg:py-28">
       <Container>
         <SectionHeading
           eyebrow={dict.services.eyebrow}
@@ -30,7 +30,7 @@ export function Services({
               <Link
                 key={service.key}
                 href={href}
-                className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-card ring-1 ring-slate-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-paper transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
               >
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
@@ -42,14 +42,14 @@ export function Services({
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-xl font-bold text-ink">{copy.title}</h3>
+                  <h3 className="text-xl font-medium text-ink">{copy.title}</h3>
                   <p className="mt-2 text-[0.95rem] font-medium text-brand-700">
                     {copy.tagline}
                   </p>
-                  <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-slate-600">
+                  <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-muted">
                     {copy.description}
                   </p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 transition-colors group-hover:text-brand-700">
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 transition-colors group-hover:text-brand-700">
                     {dict.services.cta}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </span>

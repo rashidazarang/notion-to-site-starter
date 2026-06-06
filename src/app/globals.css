@@ -1,117 +1,227 @@
 @import "tailwindcss";
 
 /*
-  Starter design system, Tailwind v4 (CSS-first). One tight token set: a single
-  brand scale + a dark "ink" for dark sections and headings, plus Mulish type.
-  Swap --color-brand-* and --color-ink to rebrand the whole site.
+  Editorial Minimal design system, Tailwind v4 (CSS-first).
+  Reading-first: a serif display + prose face (Newsreader) paired with a clean
+  grotesk UI face (Inter), on warm paper with a single indigo accent used
+  sparingly. To rebrand: change --color-brand-* (the accent) and the
+  paper / ink neutrals below. Everything else inherits.
 */
 @theme {
-  /* Brand scale (default: blue). Change these to make it yours. */
-  --color-brand-50: #eff6ff;
-  --color-brand-100: #dbeafe;
-  --color-brand-200: #bfdbfe;
-  --color-brand-300: #93c5fd;
-  --color-brand-400: #60a5fa;
-  --color-brand-500: #3b82f6;
-  --color-brand-600: #2563eb;
-  --color-brand-700: #1d4ed8;
-  --color-brand-800: #1e40af;
-  --color-brand-900: #1e3a8a;
-  --color-brand-950: #172554;
+  /* Accent: indigo-violet. The one color. */
+  --color-brand-50: #f4f0fe;
+  --color-brand-100: #e9e0fd;
+  --color-brand-200: #d6c6fb;
+  --color-brand-300: #b89cf6;
+  --color-brand-400: #9a6cf0;
+  --color-brand-500: #7e44e8;
+  --color-brand-600: #6a31e0;
+  --color-brand-700: #5a27c4;
+  --color-brand-800: #4b219f;
+  --color-brand-900: #3e1d80;
+  --color-brand-950: #260f52;
 
-  /* Ink (dark sections, headings) */
-  --color-ink: #0f172a;
-  --color-ink-soft: #1e293b;
+  /* Warm neutrals, paper & ink. The mood of the whole site. */
+  --color-paper: #fbfaf8; /* page background, warm off-white */
+  --color-paper-soft: #f4f2ec; /* recessed sections, cards */
+  --color-ink: #1a1a1a; /* headings, near-black */
+  --color-ink-soft: #3a3733; /* body text, warm */
+  --color-muted: #6b665f; /* secondary text, meta */
+  --color-line: #e7e3da; /* hairline borders */
 
-  /* Typography */
-  --font-sans: var(--font-mulish), ui-sans-serif, system-ui, -apple-system,
+  /* Type: Newsreader (serif display + prose) + Inter (sans UI) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-newsreader), ui-serif, Georgia, Cambria,
+    "Times New Roman", serif;
 
-  /* Soft, layered shadows */
-  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px rgb(15 23 42 / 0.06);
-  --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.06), 0 16px 40px rgb(15 23 42 / 0.12);
+  /* Restrained elevation, editorial leans on hairlines not shadows */
+  --shadow-card: 0 1px 2px rgb(26 26 26 / 0.03), 0 10px 30px rgb(26 26 26 / 0.05);
+  --shadow-card-hover: 0 2px 4px rgb(26 26 26 / 0.05), 0 18px 44px rgb(26 26 26 / 0.09);
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+@layer base {
+  :root {
+    --background: var(--color-paper);
+    --foreground: var(--color-ink-soft);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Headings are serif, medium weight, tight, the editorial signature. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+
+  /* Accessible, on-brand focus ring */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-brand-600);
+    color: #fff;
+  }
+  ::-moz-selection {
+    background: var(--color-brand-600);
+    color: #fff;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
+/* Letterspaced, uppercase label, used for eyebrows and section kickers. */
+@layer components {
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* Accessible, on-brand focus ring */
-:focus-visible {
-  outline: 2px solid var(--color-brand-600);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-::selection {
-  background: var(--color-brand-600);
-  color: #fff;
-}
-
-/* Blog prose: minimal, on-brand styling for Notion-rendered content */
+/*
+  Article prose, the heart of an editorial site: serif body, generous
+  measure, refined rhythm. Renders Notion content like a real essay.
+*/
 .prose {
-  color: #334155;
-  line-height: 1.75;
-  font-size: 1.0625rem;
+  font-family: var(--font-display);
+  color: var(--color-ink-soft);
+  font-size: 1.1875rem; /* ~19px */
+  line-height: 1.72;
+  letter-spacing: 0.003em;
+}
+.prose > * + * {
+  margin-top: 1.4em;
 }
 .prose h2 {
+  font-size: 1.65rem;
+  font-weight: 600;
   color: var(--color-ink);
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 2.2rem 0 0.9rem;
-  letter-spacing: -0.01em;
+  margin: 2.4rem 0 0;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
 }
 .prose h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
   color: var(--color-ink);
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 1.8rem 0 0.6rem;
+  margin: 2rem 0 0;
+  line-height: 1.25;
 }
-.prose p { margin: 0 0 1.15rem; }
-.prose a { color: var(--color-brand-700); text-decoration: underline; text-underline-offset: 2px; }
-.prose a:hover { color: var(--color-brand-600); }
-.prose ul, .prose ol { margin: 0 0 1.15rem 1.25rem; }
-.prose ul { list-style: disc; }
-.prose ol { list-style: decimal; }
-.prose li { margin: 0.35rem 0; }
-.prose img { border-radius: 0.75rem; margin: 1.5rem 0; }
-.prose blockquote {
-  border-left: 3px solid var(--color-brand-300);
-  padding-left: 1rem;
-  color: #475569;
+.prose p {
+  margin: 0;
+}
+.prose a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-brand-300);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease;
+}
+.prose a:hover {
+  text-decoration-color: var(--color-brand-600);
+}
+.prose strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+.prose em {
   font-style: italic;
-  margin: 1.5rem 0;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.3rem;
+}
+.prose ul {
+  list-style: disc;
+}
+.prose ol {
+  list-style: decimal;
+}
+.prose li {
+  margin-top: 0.4em;
+}
+.prose li::marker {
+  color: var(--color-muted);
+}
+.prose blockquote {
+  border-left: 2px solid var(--color-brand-400);
+  padding-left: 1.3rem;
+  margin-left: 0;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--color-ink);
+}
+.prose img,
+.prose figure {
+  border-radius: 0.5rem;
+}
+.prose img {
+  margin-left: auto;
+  margin-right: auto;
+}
+.prose figcaption {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: 0.6rem;
+}
+.prose hr {
+  border: 0;
+  margin: 2.6rem auto;
+  width: 4rem;
+  border-top: 1px solid var(--color-line);
 }
 .prose code {
-  background: #f1f5f9;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--color-paper-soft);
   padding: 0.15em 0.4em;
   border-radius: 0.3rem;
-  font-size: 0.9em;
+  font-size: 0.85em;
+  color: var(--color-ink);
 }
 .prose pre {
   background: var(--color-ink);
-  color: #e2e8f0;
-  padding: 1rem 1.25rem;
-  border-radius: 0.75rem;
+  color: #ececec;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 1.1rem 1.3rem;
+  border-radius: 0.6rem;
   overflow-x: auto;
-  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
-.prose pre code { background: transparent; padding: 0; }
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 }

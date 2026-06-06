@@ -3,23 +3,24 @@ import Link from "next/link";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
+// Editorial buttons: understated, near-square corners, ink as the default fill
+// with the brand reserved for links and accents.
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap",
+  "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap",
   {
     variants: {
       variant: {
-        primary:
-          "bg-brand-600 text-white shadow-sm hover:bg-brand-700 hover:shadow-md active:bg-brand-800",
+        primary: "bg-ink text-paper hover:bg-ink-soft",
         secondary:
-          "bg-white text-ink ring-1 ring-inset ring-slate-200 hover:bg-slate-50 hover:ring-slate-300",
+          "bg-transparent text-ink ring-1 ring-inset ring-line hover:bg-paper-soft hover:ring-muted",
         ghost: "text-brand-700 hover:bg-brand-50",
         outlineLight:
-          "text-white ring-1 ring-inset ring-white/40 hover:bg-white/10",
+          "text-white ring-1 ring-inset ring-white/30 hover:bg-white/10",
       },
       size: {
         sm: "h-9 px-4 text-sm",
-        md: "h-11 px-6 text-[0.95rem]",
-        lg: "h-13 px-8 text-base",
+        md: "h-11 px-5 text-[0.95rem]",
+        lg: "h-12 px-7 text-base",
       },
     },
     defaultVariants: { variant: "primary", size: "md" },

@@ -1,81 +1,36 @@
-import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { localePath, type Locale, type Dictionary } from "@/lib/i18n";
 
+// Type-led editorial hero: a large serif statement on warm paper, calm and
+// uncluttered. No stock imagery required, so it reads well for any site.
 export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/70 via-white to-white">
-      {/* Decorative brand glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-brand-200/40 blur-3xl"
-      />
-      <Container className="relative grid items-center gap-12 py-16 lg:grid-cols-12 lg:gap-10 lg:py-24">
-        <div className="lg:col-span-6">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-sm font-semibold text-brand-700 shadow-sm ring-1 ring-inset ring-brand-100">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-            {dict.hero.eyebrow}
-          </span>
+    <section className="relative overflow-hidden">
+      <Container className="flex flex-col items-center py-24 text-center lg:py-32">
+        <p className="eyebrow">{dict.hero.eyebrow}</p>
 
-          <h1 className="mt-6 text-balance text-4xl font-bold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
-            {dict.hero.title}
-          </h1>
+        <h1 className="mt-5 max-w-4xl text-balance text-4xl font-medium leading-[1.06] tracking-tight text-ink sm:text-6xl lg:text-[4.25rem]">
+          {dict.hero.title}
+        </h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-            {dict.hero.subtitle}
-          </p>
+        <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
+          {dict.hero.subtitle}
+        </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button href={localePath(locale, "/contact")} size="lg">
-              {dict.hero.ctaPrimary}
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-            <Button
-              href={localePath(locale, "/services")}
-              size="lg"
-              variant="secondary"
-            >
-              {dict.hero.ctaSecondary}
-            </Button>
-          </div>
-
-          <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-slate-200 pt-8">
-            {dict.stats.items.slice(0, 3).map((stat) => (
-              <div key={stat.label}>
-                <dt className="text-2xl font-bold text-ink sm:text-3xl">
-                  {stat.value}
-                </dt>
-                <dd className="mt-1 text-xs leading-snug text-slate-500">
-                  {stat.label}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-
-        <div className="lg:col-span-6">
-          <div className="relative mx-auto max-w-lg lg:max-w-none">
-            <div className="overflow-hidden rounded-3xl shadow-card ring-1 ring-slate-900/5">
-              <Image
-                src="/images/hero.jpg"
-                alt={dict.hero.eyebrow}
-                width={1200}
-                height={900}
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="aspect-[4/3] h-full w-full object-cover"
-              />
-            </div>
-            {/* Floating proof badge */}
-            <div className="absolute -bottom-5 -left-5 hidden rounded-2xl bg-white p-4 shadow-card ring-1 ring-slate-900/5 sm:block">
-              <p className="text-3xl font-bold text-brand-600">
-                {dict.stats.items[0].value}
-              </p>
-              <p className="text-xs text-slate-500">{dict.stats.items[0].label}</p>
-            </div>
-          </div>
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
+          <Button href={localePath(locale, "/contact")} size="lg">
+            {dict.hero.ctaPrimary}
+          </Button>
+          <Link
+            href={localePath(locale, "/services")}
+            className="group inline-flex items-center gap-1.5 text-[0.975rem] font-medium text-ink"
+          >
+            {dict.hero.ctaSecondary}
+            <ArrowRight className="h-4 w-4 text-brand-600 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
       </Container>
     </section>

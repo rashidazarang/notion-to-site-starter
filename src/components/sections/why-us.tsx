@@ -14,19 +14,21 @@ export function WhyUs({ dict }: { dict: Dictionary }) {
           title={dict.why.title}
           subtitle={dict.why.subtitle}
         />
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
           {dict.why.items.map((item, i) => {
             const Icon = icons[i] ?? Layers;
             return (
               <div
                 key={item.title}
-                className="rounded-2xl border border-slate-100 bg-white p-7 shadow-card"
+                className="rounded-2xl border border-line bg-paper p-7"
               >
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
                   <Icon className="h-6 w-6" />
                 </span>
-                <h3 className="mt-5 text-lg font-bold text-ink">{item.title}</h3>
-                <p className="mt-2 leading-relaxed text-slate-600">{item.desc}</p>
+                <h3 className="mt-5 text-lg font-medium text-ink">
+                  {item.title}
+                </h3>
+                <p className="mt-2 leading-relaxed text-muted">{item.desc}</p>
               </div>
             );
           })}

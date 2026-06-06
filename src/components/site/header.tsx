@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Phone } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./logo";
@@ -22,22 +21,22 @@ export function Header({
   const ctaHref = localePath(locale, "/contact");
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/85 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/80 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between gap-4 lg:h-18">
         <Link
           href={localePath(locale, "/")}
-          className="flex shrink-0 items-center"
+          className="flex shrink-0 items-center text-ink"
           aria-label={siteConfig.name}
         >
-          <Logo className="text-ink" />
+          <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-lg px-3 py-2 text-[0.95rem] font-medium text-slate-700 transition-colors hover:text-brand-700"
+              className="text-[0.95rem] font-medium text-muted transition-colors hover:text-ink"
             >
               {link.label}
             </Link>
@@ -45,13 +44,6 @@ export function Header({
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <a
-            href={`tel:${siteConfig.phoneHref}`}
-            className="hidden items-center gap-2 text-sm font-semibold text-ink hover:text-brand-700 xl:flex"
-          >
-            <Phone className="h-4 w-4 text-brand-600" />
-            {siteConfig.phone}
-          </a>
           <LanguageSwitcher locale={locale} />
           <Button href={ctaHref} size="sm" className="hidden lg:inline-flex">
             {dict.nav.cta}

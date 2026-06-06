@@ -23,17 +23,15 @@ export function ContactCta({
   ];
 
   return (
-    <section id="contact" className="bg-slate-50 py-20 lg:py-28">
+    <section id="contact" className="bg-paper-soft py-20 lg:py-28">
       <Container>
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-600">
-              {dict.contact.eyebrow}
-            </p>
-            <h2 className="text-balance text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <p className="eyebrow mb-3">{dict.contact.eyebrow}</p>
+            <h2 className="text-balance text-3xl font-medium tracking-tight text-ink sm:text-[2.5rem] sm:leading-[1.1]">
               {dict.contact.title}
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            <p className="mt-4 text-lg leading-relaxed text-muted">
               {dict.contact.subtitle}
             </p>
 
@@ -46,7 +44,7 @@ export function ContactCta({
                       <Icon className="h-5 w-5" />
                     </span>
                     <span>
-                      <span className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
+                      <span className="block text-xs font-semibold uppercase tracking-wide text-muted">
                         {point.label}
                       </span>
                       <span className="block font-semibold text-ink">
@@ -73,7 +71,7 @@ export function ContactCta({
             </ul>
           </div>
 
-          <div className="rounded-3xl bg-white p-6 shadow-card ring-1 ring-slate-900/5 sm:p-8">
+          <div className="rounded-2xl border border-line bg-paper p-6 sm:p-8">
             <ContactForm labels={dict.contact.form} locale={locale} />
           </div>
         </div>

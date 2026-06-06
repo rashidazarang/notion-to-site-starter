@@ -39,11 +39,11 @@ export function ContactForm({
   }
 
   const fieldBase =
-    "w-full rounded-xl border px-4 py-3 text-[0.95rem] outline-none transition focus:ring-2 focus:ring-brand-500/40";
+    "w-full rounded-lg border px-4 py-3 text-[0.95rem] outline-none transition focus:ring-2 focus:ring-brand-500/40";
   const fieldTone =
     tone === "onDark"
       ? "border-white/15 bg-white/5 text-white placeholder:text-slate-400 focus:border-brand-400"
-      : "border-slate-200 bg-white text-ink placeholder:text-slate-400 focus:border-brand-500";
+      : "border-line bg-paper text-ink placeholder:text-muted focus:border-brand-500";
 
   if (status === "sent") {
     return (
@@ -125,7 +125,7 @@ export function ContactForm({
       <button
         type="submit"
         disabled={status === "sending"}
-        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand-600 px-6 font-semibold text-white shadow-sm transition-all hover:bg-brand-700 hover:shadow-md disabled:opacity-60 sm:w-auto"
+        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-ink px-6 font-medium text-paper transition-all hover:bg-ink-soft disabled:opacity-60 sm:w-auto"
       >
         {status === "sending" ? labels.sending : labels.submit}
         {status !== "sending" && <Send className="h-4 w-4" />}

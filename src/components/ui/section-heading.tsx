@@ -9,7 +9,7 @@ interface SectionHeadingProps {
   className?: string;
 }
 
-/** Consistent eyebrow + title + subtitle block used across sections. */
+/** Consistent eyebrow + serif title + subtitle block used across sections. */
 export function SectionHeading({
   eyebrow,
   title,
@@ -29,7 +29,7 @@ export function SectionHeading({
       {eyebrow && (
         <p
           className={cn(
-            "mb-3 text-sm font-semibold uppercase tracking-[0.14em]",
+            "mb-3 text-xs font-semibold uppercase tracking-[0.14em]",
             tone === "light" ? "text-brand-300" : "text-brand-600",
           )}
         >
@@ -38,7 +38,7 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          "text-balance text-3xl font-bold tracking-tight sm:text-4xl",
+          "text-balance text-3xl font-medium tracking-tight sm:text-[2.5rem] sm:leading-[1.1]",
           tone === "light" ? "text-white" : "text-ink",
         )}
       >
@@ -48,7 +48,7 @@ export function SectionHeading({
         <p
           className={cn(
             "mt-4 text-lg leading-relaxed",
-            tone === "light" ? "text-brand-100/80" : "text-slate-600",
+            tone === "light" ? "text-brand-100/80" : "text-muted",
           )}
         >
           {subtitle}

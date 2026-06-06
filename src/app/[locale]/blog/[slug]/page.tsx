@@ -94,39 +94,43 @@ export default async function BlogPostPage({
       <Container className="max-w-3xl">
         <Link
           href={localePath(l, "/blog")}
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-ink"
         >
           <ArrowLeft className="h-4 w-4" />
           {dict.blog.backToList}
         </Link>
 
-        <header className="mt-6">
-          <div className="flex flex-wrap items-center gap-3 text-sm">
+        <header className="mt-8 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-muted">
             {catLabel && (
-              <span className="rounded-full bg-brand-50 px-3 py-1 font-semibold text-brand-700">
+              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-600">
                 {catLabel}
               </span>
             )}
-            {date && <time className="text-slate-500">{date}</time>}
+            {catLabel && date && <span aria-hidden>·</span>}
+            {date && <time>{date}</time>}
             {meta.reading_time ? (
-              <span className="inline-flex items-center gap-1.5 text-slate-500">
-                <Clock className="h-3.5 w-3.5" />
-                {meta.reading_time} {dict.blog.minRead}
-              </span>
+              <>
+                <span aria-hidden>·</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Clock className="h-3.5 w-3.5" />
+                  {meta.reading_time} {dict.blog.minRead}
+                </span>
+              </>
             ) : null}
           </div>
-          <h1 className="mt-4 text-balance text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
+          <h1 className="mt-4 text-balance text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
             {meta.title}
           </h1>
           {meta.author && (
-            <p className="mt-3 text-sm text-slate-500">
+            <p className="mt-4 text-sm text-muted">
               {dict.blog.by} {meta.author}
             </p>
           )}
         </header>
 
         {meta.cover_image && (
-          <div className="mt-8 overflow-hidden rounded-2xl">
+          <div className="mt-10 overflow-hidden rounded-2xl ring-1 ring-line">
             <NotionImage
               src={meta.cover_image}
               alt={meta.title}
@@ -135,7 +139,7 @@ export default async function BlogPostPage({
           </div>
         )}
 
-        <NotionContent body={post.content} className="prose mt-10 max-w-none" />
+        <NotionContent body={post.content} className="prose mt-12 max-w-none" />
       </Container>
     </article>
   );

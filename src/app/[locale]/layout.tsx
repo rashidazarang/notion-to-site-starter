@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mulish } from "next/font/google";
+import { Newsreader, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import "@/app/globals.css";
 import { Header } from "@/components/site/header";
@@ -15,11 +15,20 @@ import {
   type Locale,
 } from "@/lib/i18n";
 
-const mulish = Mulish({
+// Inter for UI / sans, Newsreader for serif display + long-form prose.
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-mulish",
+  variable: "--font-inter",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+  display: "swap",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
 export function generateStaticParams() {
@@ -70,8 +79,8 @@ export default async function LocaleLayout({
   const dict = await getDictionary(locale as Locale);
 
   return (
-    <html lang={locale} className={mulish.variable}>
-      <body className="flex min-h-screen flex-col bg-white antialiased">
+    <html lang={locale} className={`${inter.variable} ${newsreader.variable}`}>
+      <body className="flex min-h-screen flex-col bg-paper antialiased">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-white"

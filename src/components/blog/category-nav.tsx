@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils";
 
 function chip(active: boolean): string {
   return cn(
-    "rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+    "rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
     active
-      ? "bg-brand-600 text-white"
-      : "bg-white text-slate-600 ring-1 ring-inset ring-slate-200 hover:text-brand-700 hover:ring-brand-200",
+      ? "bg-ink text-paper"
+      : "text-muted ring-1 ring-inset ring-line hover:text-ink hover:ring-muted",
   );
 }
 

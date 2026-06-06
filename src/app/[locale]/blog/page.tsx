@@ -47,16 +47,16 @@ export default async function BlogIndexPage({
         ])}
       />
 
-      <section className="border-b border-slate-200 bg-slate-50 py-16 lg:py-20">
+      <section className="border-b border-line py-16 lg:py-24">
         <Container className="text-center">
-          <h1 className="text-balance text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+          <h1 className="text-balance text-4xl font-medium tracking-tight text-ink sm:text-5xl lg:text-6xl">
             {dict.blog.title}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted">
             {dict.blog.subtitle}
           </p>
           {categories.length > 0 && (
-            <div className="mt-8">
+            <div className="mt-9">
               <CategoryNav locale={l} dict={dict} categories={categories} />
             </div>
           )}
@@ -66,14 +66,14 @@ export default async function BlogIndexPage({
       <section className="py-16 lg:py-20">
         <Container>
           {posts.length === 0 ? (
-            <div className="mx-auto flex max-w-md flex-col items-center rounded-2xl border border-dashed border-slate-300 bg-slate-50/60 p-12 text-center">
-              <Newspaper className="h-10 w-10 text-slate-400" />
-              <p className="mt-4 text-lg font-medium text-slate-600">
+            <div className="mx-auto flex max-w-md flex-col items-center rounded-2xl border border-dashed border-line bg-paper-soft p-12 text-center">
+              <Newspaper className="h-10 w-10 text-muted" />
+              <p className="mt-4 text-lg text-muted">
                 {dict.blog.empty}
               </p>
             </div>
           ) : (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
                 <PostCard key={post.slug} post={post} locale={l} dict={dict} />
               ))}
