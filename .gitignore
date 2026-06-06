@@ -47,3 +47,6 @@ next-env.d.ts
 
 # vendored notion-to-site (separate repo we harden + push independently)
 /vendor
+
+# mentu session / tool artifacts
+.mentu/
